@@ -64,6 +64,10 @@
     },
     "lastname": {
       "type": "string"
+    },
+    "addresses": {
+      "via": "users_permissions_user",
+      "collection": "address"
     }
   }
 }
