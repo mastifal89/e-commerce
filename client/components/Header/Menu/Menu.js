@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Container, Menu, Grid, Icon } from "semantic-ui-react";
+import { Container, Menu, Grid, Icon, Label } from "semantic-ui-react";
 import Link from "next/link";
 import BasicModal from "../../Modal/BasicModal";
 import Auth from "../../Auth";
 import useAuth from "../../../hooks/useAuth";
+import useCart from "../../../hooks/useCart";
 import { getMeApi } from "../../../api/user";
 import { getPlatformsApi } from "../../../api/platform";
 import { map } from "lodash";
@@ -30,8 +31,8 @@ export default function MenuWeb() {
     (async () => {
       const response = await getPlatformsApi();
       setPlatforms(response || []);
-    })()
-  }, [])
+    })();
+  }, []);
 
   return (
     <div className="menu">
@@ -60,11 +61,12 @@ export default function MenuWeb() {
 
 function MenuPlatforms(props) {
   const { platforms } = props;
+
   return (
     <Menu>
       {map(platforms, (platform) => (
         <Link href={`/games/${platform.url}`} key={platform._id}>
-          <Menu.Item as="a" name={platform.url} >
+          <Menu.Item as="a" name={platform.url}>
             {platform.title}
           </Menu.Item>
         </Link>
@@ -75,6 +77,8 @@ function MenuPlatforms(props) {
 
 function MenuOptions(props) {
   const { onShowModal, user, logout } = props;
+  const { productsCart } = useCart();
+
   return (
     <Menu>
       {user ? (
@@ -98,12 +102,17 @@ function MenuOptions(props) {
             </Menu.Item>
           </Link>
           <Link href="/cart">
-              <Menu.Item as="a" className="m-0">
-                  <Icon name="cart"/>
-              </Menu.Item>
+            <Menu.Item as="a" className="m-0">
+              <Icon name="cart" />
+              {productsCart > 0 && (
+                <Label color="red" floating circular>
+                  {productsCart}
+                </Label>
+              )}
+            </Menu.Item>
           </Link>
           <Menu.Item onClick={logout} className="m-0">
-              <Icon name="power off" />
+            <Icon name="power off" />
           </Menu.Item>
         </>
       ) : (

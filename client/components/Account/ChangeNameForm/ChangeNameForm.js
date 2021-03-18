@@ -16,7 +16,6 @@ export default function ChangeNameForm(props) {
     onSubmit: async (formData) => {
       setLoading(true);
       const response = await updateNameApi(user.id, formData, logout);
-      console.log(response);
       if (!response) {
         toast.error("Error al actualizar el nombre y apellido");
       } else {

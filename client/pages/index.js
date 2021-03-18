@@ -4,10 +4,10 @@ import { size } from "lodash";
 import BasicLayout from "../layouts/BasicLayout";
 import { getLastGamesApi } from "../api/game";
 import ListGames from "../components/ListGames";
+import Seo from "../components/Seo";
 
 export default function Home() {
   const [games, setGames] = useState(null);
-  console.log(games)
 
   useEffect(() => {
     (async () => {
@@ -19,6 +19,9 @@ export default function Home() {
 
   return (
     <BasicLayout className="home">
+      <Seo 
+        title="hola mundo"
+      />
       {!games && <Loader active>Cargando juegos</Loader>}
       {games && size(games) === 0 && (
         <div>

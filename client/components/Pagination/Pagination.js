@@ -8,7 +8,6 @@ export default function Pagination(props) {
     const totalPages = Math.ceil(totalGames / limitPerPage);
     const router = useRouter();
     const urlParse = queryString.parseUrl(router.asPath);
-    console.log(urlParse);
 
     const goToPage = (newPage) => {
         urlParse.query.page = newPage;
