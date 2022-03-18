@@ -1,6 +1,0 @@
-name s3: ecommerce-juan
-S3BucketAccessGameEcommerce
-
-user: strapi-game-ecommerce
-id: AKIATBEUX2BQFLKGXRS7 
-clave acceso secreta: 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
